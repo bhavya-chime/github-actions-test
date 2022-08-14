@@ -5,6 +5,7 @@ on: pull_request_target
 jobs:
   comment:
     runs-on: ubuntu-latest
+    if: "!startsWith(github.event.pull_request.title, 'PR - ')"
     steps:
       - uses: actions/github-script@v6
         with:
@@ -13,5 +14,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '👋 Thanks for reporting!'
+              body: 'PR doesn't meet requirements'
             })
