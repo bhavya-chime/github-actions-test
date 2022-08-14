@@ -1,20 +1,19 @@
-name: PR Validation
+name: PR Body Validation
 
-on:
-  pull_request:
-    types: [opened]
+on: pull_request
 
 jobs:
-  check-request:
+  comment:
     runs-on: ubuntu-latest
+    if: "!contains(github.event.pull_request.body, 'https://chime.atlassian.net/browse/APPFRAME-')"
     steps:
-      - if: contains(github.event.pull_request.body, "APPFRAME")
-        uses: actions/github-script@v6
+      - uses: actions/github-script@v5
         with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'Looks like you forgot to link to your Atlas request ticket. If you don\'t have one, please use the Atlas Request workflow in the #eng-atlas channel.'
+              body: 'Your PR doesn't appear to link to an AppFrame ticket! Please provide a link or create a ticket using the Atlas Request workflow in #eng-atlas.'
             })
