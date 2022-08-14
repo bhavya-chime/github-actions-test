@@ -6,7 +6,8 @@ jobs:
   check-request:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/github-script@v5
+      - if: contains(github.event.pull_request.body, 'hi')
+        uses: actions/github-script@v5
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
