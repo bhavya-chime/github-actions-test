@@ -13,5 +13,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'PR doesn't meet requirements'
+              body: 'Looks like you forgot to link to your Atlas request ticket. If you don\'t have one, please use the Atlas Request workflow in the #eng-atlas channel'
             })
