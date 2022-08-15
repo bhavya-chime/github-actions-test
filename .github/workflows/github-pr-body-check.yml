@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: checkForTicket
-        if: "!contains(github.event.pull_request.body, 'hi')"
+        if: "!contains(github.event.pull_request.body, 'APPFRAME-')"
         run: exit 1
         continue-on-error: true
       - if: steps.checkForTicket.outcome == 'failure'
