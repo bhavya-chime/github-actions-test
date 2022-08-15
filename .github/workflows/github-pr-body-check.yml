@@ -3,11 +3,13 @@ name: PR Validation
 on: 
   pull_request_target:
       branches: [ main ]
+      # Only do it once so it's not annoying.
+      types: [opened]
 
 jobs:
 
   # Check if the PR body contains a reference to an Atlas Request ticket. 
-  # The ticket reference can either be a link or just the ticket number with the APPFRAME- prefix
+  # The ticket reference can either be a link or just the ticket number with the APPFRAME- prefix.
   check-for-ticket:
     runs-on: ubuntu-latest
     steps:
