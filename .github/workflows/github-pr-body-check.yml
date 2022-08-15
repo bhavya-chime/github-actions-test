@@ -21,3 +21,4 @@ jobs:
               repo: context.repo.repo,
               body: 'Looks like you forgot to link to your Atlas request ticket. If you don\'t have one, please use the Atlas Request workflow in the #eng-atlas channel.'
             })
+        run: exit 1
