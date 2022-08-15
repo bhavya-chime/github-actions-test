@@ -3,7 +3,7 @@ name: PR Validation
 on: 
   pull_request_target:
       branches: [ main ]
-      # Only do it once so it's not annoying.
+      # Only run this once so it's not annoying.
       types: [opened]
 
 jobs:
