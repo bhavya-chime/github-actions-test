@@ -6,7 +6,10 @@ jobs:
   check-request:
     runs-on: ubuntu-latest
     steps:
-      - if: !contains(github.event.pull_request.body, 'hi')
+      - id: checkForTicket
+        if: contains(github.event.pull_request.body, 'hi')
+        continue-on-error: true
+      - if: steps.checkForTicket.outcome == 'failure'
         uses: actions/github-script@v5
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
