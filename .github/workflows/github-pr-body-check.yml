@@ -5,11 +5,13 @@ on:
       branches: [ main ]
 
 jobs:
-  check-request:
+
+  # Check if the PR body contains a reference to an Atlas Request ticket. 
+  # The ticket reference can either be a link or just the ticket number with the APPFRAME- prefix
+  check-for-ticket:
     runs-on: ubuntu-latest
     steps:
-      - id: checkForTicket
-        if: "!contains(github.event.pull_request.body, 'APPFRAME-')"
+      - if: "!contains(github.event.pull_request.body, 'APPFRAME-')"
         uses: actions/github-script@v5
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -18,5 +20,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'Looks like you forgot to link to your Atlas request ticket. If you don\'t have one, please use the Atlas Request workflow in the #eng-atlas channel.'
+              body: 'Looks like you forgot to provide your Atlas request ticket. If you don\'t have one, please use the Atlas Request workflow in the #eng-atlas channel.'
             })
