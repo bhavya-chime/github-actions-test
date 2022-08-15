@@ -8,9 +8,6 @@ jobs:
     steps:
       - id: checkForTicket
         if: "!contains(github.event.pull_request.body, 'APPFRAME-')"
-        run: exit 1
-        continue-on-error: true
-      - if: steps.checkForTicket.outcome == 'failure'
         uses: actions/github-script@v5
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
